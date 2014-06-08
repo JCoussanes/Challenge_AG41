@@ -5,15 +5,19 @@
  *
  */
 
+
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "global_data.h"
 
-int parse_file(char* fileName){
+int parse_file(char* fileName, int *n, int *m, float *eta, int *c, int **jc, float **jdd, float **cus, float ***tm){
     FILE *fr;
-
-    char line[200], *str1, *str2, *token;
+    int *job_customer;
+    float *job_due_date;
+    float *customer;
+    float ** time_matrix;
+    *m=0;
+    char line[200], *str1, *token;
     int nbC=0;
 
     customer=malloc(sizeof(float));
@@ -44,16 +48,17 @@ int parse_file(char* fileName){
                 break;
             else{
                 if(strcmp(token,"NBR_PRODUCT")==0){
-                    n=atoi(strtok(NULL,":"));
+                    *n=atoi(strtok(NULL,":"));
                 }
                 else if(strcmp(token,"NBR_CUSTOMER")==0){
-                    m=atoi(strtok(NULL,":"));
+                    printf("yo");
+                    *m=atoi(strtok(NULL,":"));
                 }
                 else if(strcmp(token,"TRANSPORTER_CAPACITY")==0){
-                    c=atoi(strtok(NULL,":"));
+                    *c=atoi(strtok(NULL,":"));
                 }
                 else if(strcmp(token,"TRANSPORTER_DELIVERY_COST_ETA")==0){
-                    eta=atof(strtok(NULL,":"));
+                    *eta=atof(strtok(NULL,":"));
                 }
                 else if(strcmp(token,"CUSTOMER")==0){
                     nbC++;
@@ -61,7 +66,6 @@ int parse_file(char* fileName){
                 else if(strcmp(token,"CUSTOMER_HOLDING_COSTS")==0){
                     customer=realloc(customer,(nbC+1)*sizeof(float));
                     customer[nbC]=atof(strtok(NULL,":"));
-
                 }
                 else if(strcmp(token,"TRANSPORTER_DELIVERY_TIME_SUPPLIER_CUSTOMER")==0){
                     float tmp;
@@ -75,14 +79,14 @@ int parse_file(char* fileName){
                     time_matrix[nbC][0]=tmp;
                 }
                 else if(strcmp(token,"JOB_CUSTOMER")==0){
-                    job_customer=malloc(n*sizeof(int));
-                    for(i=0;i<n;i++){
+                    job_customer=malloc((*n)*sizeof(int));
+                    for(i=0;i<(*n);i++){
                         job_customer[i]=atoi(strtok(NULL,";"));
                     }
                 }
                 else if(strcmp(token,"JOB_DUE_DATES")==0){
-                    job_due_date=malloc(n*sizeof(float));
-                    for(i=0;i<n;i++){
+                    job_due_date=malloc((*n)*sizeof(float));
+                    for(i=0;i<(*n);i++){
                         job_due_date[i]=atof(strtok(NULL,";"));
                     }
                 }
@@ -96,45 +100,16 @@ int parse_file(char* fileName){
                 }
             }
         }
-        if(m==0)
-            m=nbC;
         free(newLine);
     }
+
+    if((*m)==0)
+        *m=nbC;
+
+    *jc=job_customer;
+    *jdd=job_due_date;
+    *cus=customer;
+    *tm=time_matrix;
+
     fclose(fr);
 }
-
-
-
-int main(int argc, char** argv){
-    int i,j;
-
-    if(argc != 2){
-        printf("Wrong command. should be a.out <file path>.");
-    }
-    else{
-        parse_file(argv[1]);
-
-        printf("n: %d\nm: %d\neta: %f\nc: %d\njobs:",n,m,eta,c);
-        for(i=0;i<n;i++){
-            printf(" %d",job_customer[i]);
-        }
-        printf("\n     ");
-        for(i=0;i<n;i++){
-            printf(" %0.3f",job_due_date[i]);
-        }
-        printf("\ncustomer:");
-        for(i=0;i<m+1;i++){
-            printf(" %0.3f",customer[i]);
-        }
-        printf("\n\ntime matrix:\n");
-        for(i=0;i<m+1;i++){
-            for(j=0;j<m+1;j++){
-                printf("%0.3f ",time_matrix[i][j]);
-            }
-            printf("\n");
-        }
-    }
-
-    return 0;
-}
-
