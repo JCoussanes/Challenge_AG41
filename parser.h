@@ -9,7 +9,8 @@
 #define DEF_PARSER
 
 
-int parse_file(char* fileName, int *n, int *m, float *eta, int *c, int **jc, float **jdd, float **cus, float ***tm);
+#include "data_structure.h"
+int parse_file(char* fileName, Data *d);
 
 #endif
 

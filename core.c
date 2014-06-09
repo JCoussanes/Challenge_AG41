@@ -8,18 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "parser.h"
+#include "data_structure.h"
 
 
 int main(int argc, char** argv){
-    int n=0; /*Number of products*/
-    int m=0; /*Number of customers*/
-    float eta=0; /*Transporter cost factor*/
-    int c=0; /*Transporter capacity*/
 
-    int* job_customer=NULL;
-    float* job_due_date=NULL;
-    float* customer=NULL; /*Array which contains the holding costs of each customer*/
-    float** time_matrix=NULL; /*Matrix which contains the travelling time between customers and supplier (if there is no link, the time is -1)*/
+    Data data;
 
     int i,j;
 
@@ -27,24 +21,24 @@ int main(int argc, char** argv){
         printf("Wrong command. should be a.out <file path>.");
     }
     else{
-        parse_file(argv[1],&n,&m,&eta,&c,&job_customer,&job_due_date,&customer,&time_matrix);
+        parse_file(argv[1],&data);
 
-        printf("n: %d\nm: %d\neta: %f\nc: %d\njobs:",n,m,eta,c);
-        for(i=0;i<n;i++){
-            printf(" %d",job_customer[i]);
+        printf("n: %d\nm: %d\neta: %f\nc: %d\njobs:",data.n,data.m,data.eta,data.c);
+        for(i=0;i<data.n;i++){
+            printf(" %d",data.job_customer[i]);
         }
         printf("\n     ");
-        for(i=0;i<n;i++){
-            printf(" %0.3f",job_due_date[i]);
+        for(i=0;i<data.n;i++){
+            printf(" %0.3f",data.job_due_date[i]);
         }
         printf("\ncustomer:");
-        for(i=0;i<4;i++){
-            printf(" %0.3f",customer[i]);
+        for(i=0;i<data.m+1;i++){
+            printf(" %0.3f",data.customer[i]);
         }
         printf("\n\ntime matrix:\n");
-        for(i=0;i<m+1;i++){
-            for(j=0;j<m+1;j++){
-                printf("%0.3f ",time_matrix[i][j]);
+        for(i=0;i<data.m+1;i++){
+            for(j=0;j<data.m+1;j++){
+                printf("%0.3f ",data.time_matrix[i][j]);
             }
             printf("\n");
         }
