@@ -15,7 +15,7 @@ struct data{
     float eta; /*Transporter cost factor*/
     int c; /*Transporter capacity*/
 
-    int* job_customer;/*Array which contains what customer aorderest the job i*/
+    int* job_customer;/*Array which contains what customer ordered the job i*/
     float* job_due_date;/*Array which contains what time the job i have to be delivered*/
     float* customer; /*Array which contains the holding costs of each customer*/
     float** time_matrix; /*Matrix which contains the travelling time between customers and supplier (if there is no link, the time is -1)*/

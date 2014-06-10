@@ -10,7 +10,7 @@
 #include "data_structure.h"
 
 float eval_sol(Solution s, Data d){
-    int i,j;
+    int i,j,k;
     float eval=0,arrival;
 
     for(i=0;i<s.nbTrip;i++){
@@ -25,15 +25,10 @@ float eval_sol(Solution s, Data d){
             }
 
             for(k=0;k<(sizeof(s.job_delivered[i][j])/sizeof(int));k++){
-                eval+=(d.job_due_date[s.job_delivered[i][j][k]]-arrival)*d.customer;
+                eval+=(d.job_due_date[s.job_delivered[i][j][k]]-arrival)*d.customer[d.job_customer[s.job_delivered[i][j][k]]];
             }
 
         }
     }
-}
-
-int main(int argc, char** argv){
-
-    return 0;
 }
 
