@@ -32,3 +32,35 @@ float eval_sol(Solution s, Data d){
     }
 }
 
+Solution first_sol(Solution s,Data d){
+	int i,j,k;
+	/*int * num_job_customer=0; /*Array which contains number of job demander by the client k */
+	   
+	   for(j=0;j<d.n/d.c;j++){
+	   	
+   		s.nbTrip=d.n/d.c;
+    		s.tripSize[j]=d.c-1;
+    		
+     
+     for(i = j*d.c; i < (j+1)*d.c; i++)
+      {
+        /* for(k=1;k<=d.m;k++){
+         
+		 if(d.job_customer[i]==k)
+		 num_job_customer[k]++;
+		 }*/
+		 
+         s.tripStartTime[j]+=d.time_matrix[d.job_customer[i]][d.job_customer[i+1]];  
+		  
+		/*for(f=0;f<s.tripSize[j];f++){
+    	   for(k=0;k<d.num_job_customer[k],k++)*/
+    	   
+    	s.job_delivered[j][i-j*d.c][0]=d.job_customer[i];
+	
+		}
+	
+	     s.tripStartTime[j]=d.job_due_date[j*d.c]-s.tripStartTime[j];
+        
+     }
+ }
+

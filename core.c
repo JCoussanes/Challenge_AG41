@@ -14,7 +14,7 @@
 int main(int argc, char** argv){
 
     Data data;
-
+	Solution first_sol;
     int i,j;
 
     if(argc != 2){
@@ -41,6 +41,9 @@ int main(int argc, char** argv){
                 printf("%0.3f ",data.time_matrix[i][j]);
             }
             printf("\n");
+            
+        
+        printf("The evalution of the first solution is %f\n",eval_sol(first_sol,data));
         }
     }
 
