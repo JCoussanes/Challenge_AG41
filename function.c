@@ -163,21 +163,18 @@ Solution rnd_way(Solution s, Data d){
     solcpy(&newS,&s);
     int chT=rand()%s.nbTrip;
     int chCh1=rand()%s.tripSize[chT];
-    int chCh2=rand()%s.tripSize[chT];
+    int chCh2;
     int tmp,i;
     int* tmp_del=malloc(sizeof(newS.job_delivered[chT][chCh1]));
     float eval;
 
-    while (chCh1==chCh2)
+    do{
         chCh2=rand()%s.tripSize[chT];
+    }while(newS.trip[chT][chCh1]==newS.trip[chT][chCh2]);
 
-
-
-    printf("%d %d",newS.trip[chT][chCh1],newS.trip[chT][chCh2]);
     tmp=newS.trip[chT][chCh1];
     newS.trip[chT][chCh1]=newS.trip[chT][chCh2];
     newS.trip[chT][chCh2]=tmp;
-    printf("\n%d %d",newS.trip[chT][chCh1],newS.trip[chT][chCh2]);
 
     memcpy(tmp_del,newS.job_delivered[chT][chCh1],sizeof(newS.job_delivered[chT][chCh1]));
     newS.job_delivered[chT][chCh1]=realloc(newS.job_delivered[chT][chCh1],sizeof(newS.job_delivered[chT][chCh2]));
@@ -192,4 +189,3 @@ Solution rnd_way(Solution s, Data d){
 
     return newS;
 }
->>>>>>> rndWay

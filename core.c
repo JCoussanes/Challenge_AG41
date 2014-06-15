@@ -15,14 +15,7 @@
 int main(int argc, char** argv){
 
     Data data;
-<<<<<<< HEAD
-	Solution first_sol;
-    int i,j;
-=======
-    Solution s;
-
-    int i,j,k;
->>>>>>> rndWay
+	Solution s;
 
     if(argc != 2){
         printf("Wrong command. should be a.out <file path>.");
@@ -38,7 +31,6 @@ int main(int argc, char** argv){
 
         print_sol(s,data);
 
->>>>>>> rndWay
     }
 
 
