@@ -26,6 +26,7 @@ typedef struct data Data;
 struct sol{
     int **trip;/*Array of trip. Each trip is an array of customers ordered by visiting order*/
     int ***job_delivered;/*Array of job delivered. job_delivered[0][0] is the array of job delivered at the first step of the first trip.*/
+    int **trip_jobs;/*Array of jobs on the transporter for each trip.*/
     int nbTrip;/*Number of trips*/
     int *tripSize;/*Array of lenght of trip.*/
     float *tripStartTime;/*Array of starting time of trip*/
