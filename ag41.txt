@@ -1,0 +1,24 @@
+Rapport de AG41
+
+Description de challenge
+
+-sujet
+le sujet de ce semestre est pour un but de r¨¦soudre le probl¨¨me de livraison et de stockage,plusieurs de entreprises rencontrent souvent ce probl¨¨me. Comment diminuer les d¨¦penses de livraison et de stockage avant le date limite?
+
+-syst¨¨me ¨¦tudi¨¦
+Le syst¨¨me ¨¦tudi¨¦ est compos¨¦ d¡¯un fournisseur, de 1 transporteur ¨¤ capacit¨¦ limit¨¦e(c) et de plusieurs clients (m). On s¡¯int¨¦resse ¨¤ la planification de la livraison et du stockage de produits(n) entre le fournisseur et les clients.
+
+-param¨¨tres
+Nombre de clients diff¨¦rents (m).
+Nombre de produit ¨¤ livrer (n).
+Capacit¨¦ de transporteur (c):une capacit¨¦c qui d¨¦termine le nombre de produit maximal pouvant ¨ºtre livr¨¦s en une seule fois.
+Le temps de transport entre le client i et le client j: Tij (si i ou j equal 0, il repr¨¦sente le fournisseur).
+Co?t de transport:k*Tij, k est un coefficent non nul.
+Chaque produit a un date limite(di):une date que doit ¨ºtre respect¨¦ (le job i doit ¨ºtre livr¨¦ chez le client avant di)  les jobs sont class¨¦es par ordre croissant des dates dues di.
+Le date arrive de produit i :Ci.
+Co?t de stockage:Bh(di-Ci). (Bh est le co?t de stockage untaire chez le client h)
+
+-objectif
+L¡¯objectif est de minimiser la somme des co?ts de transport et de stockage.
+
+Pour r¨¦soudre ce probl¨¨me, on choisir le m¨¦thode approch¨¦e. 

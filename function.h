@@ -60,6 +60,6 @@ void print_sol(Solution s,Data data);
  *      which deliver more or less job in one step of one trip.*/
 Solution rnd_way(Solution s, Data d);
 
-
+/*(sizeof(trip_jobs[i])/sizeof(int))-1*/ 
 #endif
 

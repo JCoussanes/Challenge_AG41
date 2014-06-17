@@ -189,3 +189,32 @@ Solution rnd_way(Solution s, Data d){
 
     return newS;
 }
+
+Solution rnd_job(Solution s, Data d){
+    srand(time(NULL));
+    Solution newS;
+    solcpy(&newS,&s);
+    int chT1=rand()%s.nbTrip;
+    int chT2=rand()%s.nbTrip;
+    int chjob1=rand()%((sizeof(s.trip_jobs[chT1])/sizeof(int))-1);
+    int chjob2;
+    int tmp,i;
+    float eval;
+
+	while (chT1==chT2){
+		chT2=rand()%s.nbTrip;
+	}   
+	chjob2=rand()%((sizeof(s.trip_jobs[chT2])/sizeof(int))-1);
+	
+	tmp=newS.trip_jobs[chT2][chjob2];
+	newS.trip_jobs[chT2][chjob2]=s.trip_jobs[chT1][chjob1];
+	s.trip_jobs[chT1][chjob1]=tmp;
+	
+
+    while((eval=eval_sol(newS,d,&i))<0)
+        newS.tripStartTime[i]+=eval;
+
+    return newS;
+}
+
+
